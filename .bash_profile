@@ -1,12 +1,16 @@
-if tty -s && command -v nvidia-smi &> /dev/null; then
-    nvidia-smi
-fi
+# .bash_profile
 
-if [ "$SHELL" != "/bin/zsh" ]; then
-    export SHELL="/bin/zsh"
-    exec /bin/zsh -l # -l: login shell again
-fi
+PATH=$PATH:$HOME/bin
+
+# ZSHELL="/blue/avery/ekoenig/conda/envs/zsh/bin/zsh"
+# if [ "$SHELL" != $ZSHELL ]; then
+#     echo "Changing shell to zsh"
+#     export SHELL=$ZSHELL
+#     exec $ZSHELL -l # -l: login shell again
+# fi
 
 if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
+	. ~/.bashrc
 fi
+
+# User specific environment and startup programs

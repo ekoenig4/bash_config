@@ -32,41 +32,16 @@ alias crabenv='source /cvmfs/cms.cern.ch/crab3/crab.sh'
 alias clean="find . -maxdepth 2 -type f -name '*~' -delete"
 alias clear="printf '\033c'"
 
-alias gpuenv="singularity run --nv --bind `readlink $HOME` --bind `readlink -f ${HOME}/nobackup/` --bind /cvmfs /cvmfs/unpacked.cern.ch/registry.hub.docker.com/fnallpc/fnallpc-docker\:tensorflow-latest-gpu-singularity/"
-
 alias conda=mamba
 alias pyenv="conda activate py-env"
-
-alias git=/uscms_data/d3/ekoenig/mambaforge/bin/git
 
 export FEOS="root://cmseos.fnal.gov/"
 export CEOS="root://eoscms.cern.ch/"
 alias feos="eos ${FEOS}"
 alias ceos="eos ${CEOS}"
 
-export PATH="/uscms_data/d3/ekoenig/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 function cdl () {
 	 cd $(readlink -f $1)
 }
-
-export PATH="~/bin/:$PATH"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/uscms_data/d3/ekoenig/mambaforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/uscms_data/d3/ekoenig/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/uscms_data/d3/ekoenig/mambaforge/etc/profile.d/conda.sh"
-    else
-        export PATH="/uscms_data/d3/ekoenig/mambaforge/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-if [ -f "/uscms_data/d3/ekoenig/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "/uscms_data/d3/ekoenig/mambaforge/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
