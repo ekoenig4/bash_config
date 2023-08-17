@@ -1,97 +1,81 @@
+
+# .bashrc
+
+# Source global definitions
 if [ -f /etc/bashrc ]; then
-    source /etc/bashrc 
+    . /etc/bashrc
 fi
 
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+if [[ "$HOSTNAME" == uwlogin* ]]; then
 
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
-
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
+    # This gets you some software needed for CONDOR submission
+    if [ -f /cms/setup/bashrc ]; then
+        . /cms/setup/bashrc
     fi
+
+    # Alias to get access to your /afs/hep.wisc.edu area (but you lose /afs/cern.sh access)
+    alias uw='kinit ekoenig4@HEP.WISC.EDU; aklog -c hep.wisc.edu'
+    alias hep='cd /afs/hep.wisc.edu/home/ekoenig4/'
+
+    # Put Git cache somewhere with plenty of space
+    export CMSSW_GIT_REFERENCE=/data/ekoenig4/.cmsgit-cache;
+
+    # Use updated versions of Git and Python (and some Python utilities) outside of a CMSSW environment
+    export PATH=/cms/sw/python/bin/:/cms/sw/python/lib/:/cms/sw/git/bin/:"$PATH"
+    # Git does its own funny business with paths, so do this to make sure it works
+    export GIT_EXEC_PATH=/cms/sw/git/libexec/git-core
+
+    # Make ROOT/PyROOT available outside a CMSSW environment
+    . /afs/cern.ch/sw/lcg/external/gcc/4.8/x86_64-slc6/setup.sh
+    . /afs/cern.ch/sw/lcg/app/releases/ROOT/5.34.30/x86_64-slc6-gcc48-opt/root/bin/thisroot.sh
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+if [[ "$HOSTNAME" == lxplus* ]]; then
+    alias uw='kinit ekoenig4@HEP.WISC.EDU; aklog -c hep.wisc.edu'
+    alias hep='cd /afs/hep.wisc.edu/home/ekoenig4/'
 fi
 
-export PS1="[\u@\h \W]\$ "
+alias root='root -l'
 
-if [ -f ~/.userrc ]; then
-    . ~/.userrc
-fi
+alias cards='cd /data/ekoenig/MonoZprimeJet/HiggsCombine/CMSSW_8_1_0/src/HiggsAnalysis/CombinedLimit/'
+
+alias zprime='cd /data/ekoenig/MonoZprimeJet/CMSSW_8_0_26_patch1/src/ZprimeTools/'
+
+alias gif='cd /afs/cern.ch/user/k/kkuzn/public/CSC/GC/'
+alias gc='cd /data/ekoenig/CSC/GC/CMSSW_8_0_26_patch1/src/GC/treatGC/'
+alias gg='cd /data/ekoenig/CSC/GasGain/CMSSW_6_2_12/src'
+alias gg2='cd /data/ekoenig/CSC/GasGain/CMSSW_7_5_9/src/WorkingArea/Gif/test/'
+
+#export DISPLAY=localhost:0.0
+alias clear='printf "\033c"'
+
+alias crabenv='source /cvmfs/cms.cern.ch/crab3/crab.sh'
+alias voms='voms-proxy-init --rfc --voms cms -valid 192:00'
+alias cmsvoms='voms-proxy-init -voms cms -valid 144:00'
+
+export FEOS=root://cmseos.fnal.gov/
+export CEOS=root://eoscms.cern.ch/
+
+export X509_USER_PROXY=$HOME/.krb5/x509up_u`id -u`
+
 # >>> conda initialize >>>
+
+alias conda=mamba
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/uscms_data/d3/ekoenig/mambaforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/afs/cern.ch/user/e/ekoenig/mambaforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/uscms_data/d3/ekoenig/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/uscms_data/d3/ekoenig/mambaforge/etc/profile.d/conda.sh"
+    if [ -f "/afs/cern.ch/user/e/ekoenig/mambaforge/etc/profile.d/conda.sh" ]; then
+        . "/afs/cern.ch/user/e/ekoenig/mambaforge/etc/profile.d/conda.sh"
     else
-        export PATH="/uscms_data/d3/ekoenig/mambaforge/bin:$PATH"
+        export PATH="/afs/cern.ch/user/e/ekoenig/mambaforge/bin:$PATH"
     fi
 fi
 unset __conda_setup
 
-if [ -f "/uscms_data/d3/ekoenig/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "/uscms_data/d3/ekoenig/mambaforge/etc/profile.d/mamba.sh"
+if [ -f "/afs/cern.ch/user/e/ekoenig/mambaforge/etc/profile.d/mamba.sh" ]; then
+    . "/afs/cern.ch/user/e/ekoenig/mambaforge/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
 

@@ -1,12 +1,12 @@
-if tty -s && command -v nvidia-smi &> /dev/null; then
-    nvidia-smi
-fi
+# .bash_profile
 
-if [ "$SHELL" != "/bin/zsh" ]; then
-    export SHELL="/bin/zsh"
-    exec /bin/zsh -l # -l: login shell again
-fi
-
+# Get the aliases and functions
 if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
+	. ~/.bashrc
 fi
+
+# User specific environment and startup programs
+
+PATH=$PATH:$HOME/bin
+
+export PATH
