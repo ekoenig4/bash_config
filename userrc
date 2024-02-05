@@ -1,0 +1,58 @@
+export HISTFILE=/$HOME/.bash_history
+
+# --- Peronal Configurations #
+alias cmsset="source /cvmfs/cms.cern.ch/cmsset_default.sh"
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Set your env vars:
+
+export X509_USER_PROXY=$HOME/x509up_u$(id -u)
+export X509_CERT_DIR=/cvmfs/cms.cern.ch/grid/etc/grid-security/certificates
+export X509_VOMS_DIR=/cvmfs/cms.cern.ch/grid/etc/grid-security/vomsdir
+export VOMS_USERCONF=/cvmfs/cms.cern.ch/grid/etc/vomses
+alias crabenv='source /cvmfs/cms.cern.ch/crab3/crab.sh'
+
+alias clean="find . -maxdepth 2 -type f -name '*~' -delete"
+alias clear="printf '\033c'"
+
+export FEOS="root://cmseos.fnal.gov/"
+export CEOS="root://eoscms.cern.ch/"
+alias feos="eos ${FEOS}"
+alias ceos="eos ${CEOS}"
+
+alias time='/usr/bin/time -f "Elapsed Time: %E\nUser CPU Time: %U\nKernel CPU Time: %S\nMax RSS: %M KB\nAvg RSS: %t KB\nVoluntary Swaps: %w\nInvoluntary Context Switches: %c"'
+
+function launch_jupyter() {
+    launch_jupyter_notebook &> $HOME/jupyter.log 
+}
+
+function cdl () {
+	 cd $(readlink -f $1)
+}
+
+function averyinfo() {
+    slurmInfo avery
+}
