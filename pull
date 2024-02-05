@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 REPO=$(dirname $0)
-source $REPO/setup
+source $REPO/setup.sh
 
 for CFG in ${CFGS[@]}; do
-    if [ -f $REPO/$CFG ]; then
+    if [ -f ~/.$CFG ]; then
         cp -v ~/.$CFG $REPO/$CFG 
     fi
 done
