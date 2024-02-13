@@ -5,7 +5,7 @@ if [ "$SHELL" == "/bin/zsh" ]; then
 fi
 
 if [ "$SHELL" == "/bin/bash" ]; then
-    if [ -f ~/.bash_profile ]; then
-        . ~/.bash_profile
+    if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
     fi
 fi

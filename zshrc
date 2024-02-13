@@ -108,5 +108,9 @@ if [ -f ~/.bash_local ]; then
     . ~/.bash_local
 fi
 
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
 # --- General --- #
 export PS1="%F{010}%n@%m%F%F{015}:%F%F{012}%d%F%F{015}$ "

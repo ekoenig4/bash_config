@@ -2,6 +2,7 @@
 
 CFGS=(
     bash_profile
+    bash_aliases
     bash_local
     bashrc
 )
