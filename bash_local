@@ -3,6 +3,8 @@ if [ -f /etc/bashrc ]; then
    source /etc/bashrc
 fi
 
+module load conda
+
 export PATH=$HOME/bin:$PATH
 
 alias cmsset="source /cvmfs/cms.cern.ch/cmsset_default.sh"
@@ -11,6 +13,14 @@ export X509_CERT_DIR=/cvmfs/cms.cern.ch/grid/etc/grid-security/certificates
 export X509_VOMS_DIR=/cvmfs/cms.cern.ch/grid/etc/grid-security/vomsdir
 export VOMS_USERCONF=/cvmfs/cms.cern.ch/grid/etc/vomses
 alias crabenv='source /cvmfs/cms.cern.ch/crab3/crab.sh'
+
+
+# --- Kerberos --- #
+
+export KRB5_CONFIG=~/.ssh/krb5.conf
+export KRB5CCNAME=$HOME/krb5cc_$(id -u)
+# init hep and fnal kerberos and allow for renew for 200 hours
+alias kfnal="kinit -r 200h -f ekoenig@FNAL.GOV"
 
 function launch_jupyter() {
     launch_jupyter_notebook &> $HOME/jupyter.log 
@@ -23,5 +33,3 @@ function cdl () {
 function averyinfo() {
     slurmInfo avery
 }
-
-module load conda
