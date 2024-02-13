@@ -1,73 +1,33 @@
 ################
-# BlackMariner #
+# LPC #
 ################
 
 # --- Alias --- #
 
-# shift tunnel
-alias cms-online='ssh -t -l ekoenig lxplus.cern.ch -L 1080:localhost:1081 "ssh -ND 1081 ekoenig@cmsusr"'
-
 # --- Kerberos --- #
-
-# kerberos credentials cache
-export KRB5CCNAME=DIR:${HOME}/.cache/krb5cc 
 
 # --- LANG --- #
-export LANG=en_GB.UTF-8
 
 # --- CERN --- #
-export CVSROOT=:gserver:isscvs.cern.ch:/local/reps/tridas
-
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-
-umask 022
-export MOZ_FORCE_DISABLE_E10S=1
-alias cern="cd /mnt/c/Users/evank/OneDrive/CERN/"
-alias clean="find . -maxdepth 1 -name \"*~\" -delete"
-alias clear='printf '\''\033c'\'''
 
 # --- Kerberos --- #
-
-# init hep and fnal kerberos and allow for renew for 200 hours
-alias kfnal="kinit -r 200h -f ekoenig@FNAL.GOV"
-alias khep="kinit -r 200h -f ekoenig4@HEP.WISC.EDU"
-alias kcern="kinit -r 200h -f ekoenig@CERN.CH"
-alias kinits="kfnal && khep && kcern"
-
-# renew kerberos tickets
-
-alias rkfnal="KRB5CCNAME=`KRB5CCNAME=DIR:$HOME/.cache/krb5cc klist -l | grep FNAL.GOV | sed -e s'/.*:://g'` kinit -R ekoenig@FNAL.GOV"
-alias rkhep="KRB5CCNAME=`KRB5CCNAME=DIR:$HOME/.cache/krb5cc klist -l | grep HEP.WISC.EDU | sed -e s'/.*:://g'` kinit -R ekoenig4@HEP.WISC.EDU"
-alias rkcern="KRB5CCNAME=`KRB5CCNAME=DIR:$HOME/.cache/krb5cc klist -l | grep CERN.CH | sed -e s'/.*:://g'` kinit -R ekoenig@CERN.CH"
-
-rkinits () {
-	KRB5CCNAME=`KRB5CCNAME=DIR:$HOME/.cache/krb5cc klist -l | grep HEP.WISC.EDU | sed -e s'/.*:://g'` kinit -R ekoenig4@HEP.WISC.EDU
-	KRB5CCNAME=`KRB5CCNAME=DIR:$HOME/.cache/krb5cc klist -l | grep FNAL.GOV | sed -e s'/.*:://g'` kinit -R ekoenig@FNAL.GOV
-	KRB5CCNAME=`KRB5CCNAME=DIR:$HOME/.cache/krb5cc klist -l | grep CERN.CH | sed -e s'/.*:://g'` kinit -R ekoenig@CERN.CH
-}
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/ekoenig/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/ekoenig/nobackup/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/ekoenig/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/home/ekoenig/mambaforge/etc/profile.d/conda.sh"
+    if [ -f "/home/ekoenig/nobackup/mambaforge/etc/profile.d/conda.sh" ]; then
+        . "/home/ekoenig/nobackup/mambaforge/etc/profile.d/conda.sh"
     else
-        export PATH="/home/ekoenig/mambaforge/bin:$PATH"
+        export PATH="/home/ekoenig/nobackup/mambaforge/bin:$PATH"
     fi
 fi
 unset __conda_setup
 
-if [ -f "/home/ekoenig/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "/home/ekoenig/mambaforge/etc/profile.d/mamba.sh"
+if [ -f "/home/ekoenig/nobackup/mambaforge/etc/profile.d/mamba.sh" ]; then
+    . "/home/ekoenig/nobackup/mambaforge/etc/profile.d/mamba.sh"
 fi
 
 # <<< conda initialize <<<
