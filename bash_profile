@@ -1,16 +1,11 @@
-# .bash_profile
-
-PATH=$PATH:$HOME/bin
-
-# ZSHELL="/blue/avery/ekoenig/conda/envs/zsh/bin/zsh"
-# if [ "$SHELL" != $ZSHELL ]; then
-#     echo "Changing shell to zsh"
-#     export SHELL=$ZSHELL
-#     exec $ZSHELL -l # -l: login shell again
-# fi
-
-if [ -f ~/.bashrc ]; then
-	. ~/.bashrc
+if [ "$SHELL" == "/bin/zsh" ]; then
+    if [ -f ~/.zshrc ]; then
+        . ~/.zshrc
+    fi
 fi
 
-# User specific environment and startup programs
+if [ "$SHELL" == "/bin/bash" ]; then
+    if [ -f ~/.bash_profile ]; then
+        . ~/.bash_profile
+    fi
+fi
