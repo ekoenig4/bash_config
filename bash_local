@@ -68,3 +68,26 @@ rkinits () {
 	KRB5CCNAME=`KRB5CCNAME=DIR:$HOME/.cache/krb5cc klist -l | grep FNAL.GOV | sed -e s'/.*:://g'` kinit -R ekoenig@FNAL.GOV
 	KRB5CCNAME=`KRB5CCNAME=DIR:$HOME/.cache/krb5cc klist -l | grep CERN.CH | sed -e s'/.*:://g'` kinit -R ekoenig@CERN.CH
 }
+
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/ekoenig/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/ekoenig/mambaforge/etc/profile.d/conda.sh" ]; then
+        . "/home/ekoenig/mambaforge/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/ekoenig/mambaforge/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+if [ -f "/home/ekoenig/mambaforge/etc/profile.d/mamba.sh" ]; then
+    . "/home/ekoenig/mambaforge/etc/profile.d/mamba.sh"
+fi
+
+alias conda=mamba
+# <<< conda initialize <<<

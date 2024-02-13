@@ -73,14 +73,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -94,8 +86,3 @@ fi
 
 # --- General --- #
 export PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
-
-
-if [ -f "$HOME/.userrc" ]; then
-    . "$HOME/.userrc"
-fi

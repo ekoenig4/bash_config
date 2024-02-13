@@ -103,32 +103,10 @@ source $ZSH/oh-my-zsh.sh
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
+
+if [ -f ~/.bash_local ]; then
+    . ~/.bash_local
+fi
+
 # --- General --- #
 export PS1="%F{010}%n@%m%F%F{015}:%F%F{012}%d%F%F{015}$ "
-
-
-if [ -f "$HOME/.userrc" ]; then
-    . "$HOME/.userrc"
-fi
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/ekoenig/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/ekoenig/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/home/ekoenig/mambaforge/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/ekoenig/mambaforge/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-if [ -f "/home/ekoenig/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "/home/ekoenig/mambaforge/etc/profile.d/mamba.sh"
-fi
-
-alias conda=mamba
-# <<< conda initialize <<<
-
