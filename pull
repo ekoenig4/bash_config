@@ -5,6 +5,7 @@ source $REPO/setup.sh
 
 for CFG in ${CFGS[@]}; do
     if [ -f ~/.$CFG ]; then
-        cp -v ~/.$CFG $REPO/$CFG 
+        echo "Copying ~/.$CFG to $REPO"
+        cat ~/.$CFG > $REPO/$CFG 
     fi
 done

@@ -1,6 +1,6 @@
 CFGS=(
     bash_profile
+    bash_local
     bashrc
-    userrc
     zshrc
 )

@@ -5,7 +5,9 @@ source $REPO/setup.sh
 
 for CFG in ${CFGS[@]}; do
     if [ -f $REPO/$CFG ]; then
-        cp -v $REPO/$CFG ~/.$CFG
+        echo "Copying $CFG to ~"
+        rm -f ~/.$CFG
+        cat $REPO/$CFG > ~/.$CFG
         chmod 444 ~/.$CFG
     fi
 done
