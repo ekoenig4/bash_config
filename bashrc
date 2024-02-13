@@ -69,6 +69,7 @@ unset color_prompt force_color_prompt
 #     ;;
 # esac
 
+<<<<<<< HEAD:.bashrc
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -93,6 +94,8 @@ alias l='ls -CF'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+=======
+>>>>>>> from-hpg:bashrc
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -122,3 +125,28 @@ fi
 if [ -f ~/.userrc ]; then
     . ~/.userrc
 fi
+<<<<<<< HEAD:.bashrc
+=======
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/orange/avery/ekoenig/mambaforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/orange/avery/ekoenig/mambaforge/etc/profile.d/conda.sh" ]; then
+        . "/orange/avery/ekoenig/mambaforge/etc/profile.d/conda.sh"
+    else
+        export PATH="/orange/avery/ekoenig/mambaforge/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+if [ -f "/orange/avery/ekoenig/mambaforge/etc/profile.d/mamba.sh" ]; then
+    . "/orange/avery/ekoenig/mambaforge/etc/profile.d/mamba.sh"
+fi
+
+# <<< conda initialize <<<
+
+>>>>>>> from-hpg:bashrc
