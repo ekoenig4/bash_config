@@ -4,7 +4,6 @@ CFGS=(
     bash_profile
     bash_local
     bashrc
-    zshrc
 )
 
 REPO=$(dirname $0)
