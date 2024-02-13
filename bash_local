@@ -1,4 +1,10 @@
 
+if [ -f /etc/bashrc ]; then
+   source /etc/bashrc
+fi
+
+export PATH=$HOME/bin:$PATH
+
 alias cmsset="source /cvmfs/cms.cern.ch/cmsset_default.sh"
 export X509_USER_PROXY=$HOME/x509up_u$(id -u)
 export X509_CERT_DIR=/cvmfs/cms.cern.ch/grid/etc/grid-security/certificates
@@ -17,3 +23,5 @@ function cdl () {
 function averyinfo() {
     slurmInfo avery
 }
+
+module load conda
