@@ -5,7 +5,6 @@ CFGS=(
     bash_aliases
     bash_local
     bashrc
-    zshrc
 )
 
 REPO=$(dirname $0)
