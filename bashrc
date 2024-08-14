@@ -1,21 +1,21 @@
-if [ -f /etc/bashrc ]; then
-    source /etc/bashrc 
-fi
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
+
+if [ -f ~/.bash_local ]; then
+    . ~/.bash_local
+fi
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
-
-# if zsh is available, use it
-if [ -x /bin/zsh ]; then
-    exec /bin/zsh
-fi
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -49,35 +49,6 @@ case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
-if [[ "$HOSTNAME" == uwlogin* ]]; then
-
-    # This gets you some software needed for CONDOR submission
-    if [ -f /cms/setup/bashrc ]; then
-        . /cms/setup/bashrc
-    fi
-
-    # Alias to get access to your /afs/hep.wisc.edu area (but you lose /afs/cern.sh access)
-    alias uw='kinit ekoenig4@HEP.WISC.EDU; aklog -c hep.wisc.edu'
-    alias hep='cd /afs/hep.wisc.edu/home/ekoenig4/'
-
-    # Put Git cache somewhere with plenty of space
-    export CMSSW_GIT_REFERENCE=/data/ekoenig4/.cmsgit-cache;
-
-    # Use updated versions of Git and Python (and some Python utilities) outside of a CMSSW environment
-    export PATH=/cms/sw/python/bin/:/cms/sw/python/lib/:/cms/sw/git/bin/:"$PATH"
-    # Git does its own funny business with paths, so do this to make sure it works
-    export GIT_EXEC_PATH=/cms/sw/git/libexec/git-core
-
-    # Make ROOT/PyROOT available outside a CMSSW environment
-    . /afs/cern.ch/sw/lcg/external/gcc/4.8/x86_64-slc6/setup.sh
-    . /afs/cern.ch/sw/lcg/app/releases/ROOT/5.34.30/x86_64-slc6-gcc48-opt/root/bin/thisroot.sh
-fi
-
-if [[ "$HOSTNAME" == lxplus* ]]; then
-    alias uw='kinit ekoenig4@HEP.WISC.EDU; aklog -c hep.wisc.edu'
-    alias hep='cd /afs/hep.wisc.edu/home/ekoenig4/'
-fi
-
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
@@ -94,6 +65,22 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -102,16 +89,8 @@ if ! shopt -oq posix; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
-    fi
+  fi
 fi
 
-# Use updated versions of Git and Python (and some Python utilities) outside of a CMSSW environment
-export PATH=/cms/sw/python/bin/:/cms/sw/python/lib/:/cms/sw/git/bin/:"$PATH"
-# Git does its own funny business with paths, so do this to make sure it works
-export GIT_EXEC_PATH=/cms/sw/git/libexec/git-core
-
-export PS1="[\u@\h \W]\$ "
-
-if [ -f ~/.userrc ]; then
-    . ~/.userrc
-fi
+# --- General --- #
+export PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "

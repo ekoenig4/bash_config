@@ -100,13 +100,17 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export PS1="[%n@%m %1d]\$ "
-compinit -d ~/.cache/zsh/zcompdump-$ZSH_VERSION
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-if [ -f ~/.userrc ]; then
-    . ~/.userrc
+
+if [ -f ~/.bash_local ]; then
+    . ~/.bash_local
 fi
 
-# --- Init Muon-Phase2 Environment #
-# cd /uscms_data/d3/ekoenig/Trigger/Phase2/CMSSW_12_5_2_patch1/src/L1Trigger/P2L1TMuonVal
-# source .vscode/env-config.sh
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# --- General --- #
+export PS1="%F{010}%n@%m%F%F{015}:%F%F{012}%d%F%F{015}$ "
