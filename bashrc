@@ -63,25 +63,5 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/orange/avery/ekoenig/mambaforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/orange/avery/ekoenig/mambaforge/etc/profile.d/conda.sh" ]; then
-#         . "/orange/avery/ekoenig/mambaforge/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/orange/avery/ekoenig/mambaforge/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-
-# if [ -f "/orange/avery/ekoenig/mambaforge/etc/profile.d/mamba.sh" ]; then
-#     . "/orange/avery/ekoenig/mambaforge/etc/profile.d/mamba.sh"
-# fi
-
-# <<< conda initialize <<<
 export PS1="[\u@\h \W]\$ "
 # export PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
